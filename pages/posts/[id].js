@@ -8,7 +8,7 @@ import Date from '../../components/date';
 import utilStyles from '../../styles/utils.module.css';
  
 // Import the getAllPostIds and getPostData functions from the posts library
-import { getAllPostIds, getPostData } from '../../lib/posts';
+import { getAllPostIds, getPostData } from '../../lib/posts-json';
  
 // Export an async function that runs at build time to fetch data for static generation
 export async function getStaticProps({ params }) {
@@ -52,7 +52,7 @@ export default function Post({ postData }) {
         <article>
           <h1 className={utilStyles.headingXl}>{postData.title}</h1>
           <div className={utilStyles.lightText}>
-            <Date dateString={postData.date} />
+            By {postData.author} • <Date dateString={postData.date} />
           </div>
           <div className={utilStyles.postborder} dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
         </article>

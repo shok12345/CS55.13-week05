@@ -9,7 +9,7 @@ import utilStyles from '../styles/utils.module.css';
 // Import the Date component for formatting dates
 import Date from '../components/date';
 // Import the getSortedPostsData function from the posts library
-import { getSortedPostsData } from '../lib/posts';
+import { getSortedPostsData } from '../lib/posts-json';
  
 // Export an async function that runs at build time to fetch data for static generation
 export async function getStaticProps() {
@@ -76,15 +76,15 @@ export default function Home({ allPostsData}) {
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
           {/* Use the map function to iterate over the allPostsData array */}
-          {allPostsData.map(({ id, date, title }) => (
-           /* Destructure id, date, and title from each post object */
+          {allPostsData.map(({ id, date, title, author }) => (
+           /* Destructure id, date, title, and author from each post object */
            <li className={utilStyles.listItem} key={id}>
            {/* Create a Link component with dynamic href using template literal */}
            <Link href={`/posts/${id}`}>{title}</Link>
            <br />
            <small className={utilStyles.lightText}>
-             {/* Pass the date string to the Date component for formatting */}
-             <Date dateString={date} />
+             {/* Display author and date */}
+             By {author} • <Date dateString={date} />
            </small>
          </li>
           ))}
